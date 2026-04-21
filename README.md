@@ -26,8 +26,7 @@ Aktuell auf der Suche nach einer Ausbildung zum Fachinformatiker für Anwendungs
 
 ## Aktuell
 
-- Ausbildung zum *Fachinformatiker für Anwendungsentwicklung* (angestrebt)
-- *Elements of AI* Zertifikat in Arbeit
+- Mycro AI dictation Windows desktop App
 - Projekte mit Fokus auf Webentwicklung und KI-APIs
 
 ---
