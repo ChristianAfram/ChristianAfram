@@ -1,9 +1,38 @@
-Über mich: Ich bin leidenschaftlicher Software-Entwickler. Ich beschäftige mich hauptsächlich mit Erstellung von professionelle Landing-Pages, AI integrations, und Software-Entwicklung, ich strebe eine Ausbildung zum Fachinformatikern für Anwendungsentwicklung
+# Christian Afram
 
-Aktueller Fokus: Gerade arbeite ich am 'Elements of AI' Zertifikat und lerne die Grundlagen von Python.
+Software developer in training — building AI-integrated tools and web applications.
+Currently pursuing *Fachinformatiker für Anwendungsentwicklung*.
 
-Meine Ziele: Eine Abgeschlossene Ausbildung als Fachinformatiker für Anwendungsentwickelung.
+---
 
-Meine Motivation: Seitdem ich denken kann, ist meine Liebe und Passion zu software, Computer, tech, jeden Tag größer gewachsen.
+## Tech Stack
 
-Hard-Skills: Hardware-Building (Custom Setups), Ai integration, Prompt engineering, Kreativität, Logisches Denken, Lernbereitschaft.
+**Languages:** TypeScript · Python · HTML · CSS  
+**Frameworks & Libraries:** React · Next.js  
+**Tools:** Git · Vercel · VS Code  
+**Focus areas:** AI integration · Web development · Prompt engineering
+
+---
+
+## Projects
+
+| Project | Description | Stack |
+|---|---|---|
+| [WorldMap](https://github.com/ChristianAfram/Wrldmap-0.0.1) | Browser-based interactive map where users rearrange countries to build a custom Earth. Live on Vercel. | TypeScript |
+| [Mycro](https://github.com/ChristianAfram/Mycro-0.1) | AI-powered voice dictation assistant | TypeScript |
+| [Modular Prompt System](https://github.com/ChristianAfram/modular-prompt-system) | Composable prompt building system for LLM workflows | Python |
+
+---
+
+## Currently
+
+- Working toward *Fachinformatiker für Anwendungsentwicklung* certification
+- Completing the *Elements of AI* course
+- Building projects that combine web development with AI APIs
+
+---
+
+## Contact
+
+Open to apprenticeship opportunities and collaborations.  
+Reach me at: **[add your email or LinkedIn here]**
