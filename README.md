@@ -1,7 +1,7 @@
 # Christian Afram
 
 Angehender Softwareentwickler — ich baue KI-integrierte Tools und Webanwendungen.
-Aktuell auf dem Weg zum *Fachinformatiker für Anwendungsentwicklung*.
+Aktuell auf der Suche nach einer Ausbildung zum Fachinformatiker für Anwendungsentwicklung.
 
 ---
 
