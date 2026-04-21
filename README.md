@@ -35,4 +35,4 @@ Currently pursuing *Fachinformatiker für Anwendungsentwicklung*.
 ## Contact
 
 Open to apprenticeship opportunities and collaborations.  
-Reach me at: **[add your email or LinkedIn here]**
+Reach me at: christianafram54@gmail.com
