@@ -1,17 +1,17 @@
 # Modular Prompt System
 
-A composable building-block system for constructing structured prompts for large language models (LLMs).
+Ein modulares Baukastensystem zum strukturierten Aufbau von Prompts für große Sprachmodelle (LLMs).
 
-Instead of writing monolithic prompt strings, this system lets you define reusable prompt components and assemble them programmatically.
+Statt monolithischer Prompt-Strings lassen sich wiederverwendbare Komponenten definieren und programmgesteuert zusammensetzen.
 
 ---
 
-## Features
+## Funktionen
 
-- Define prompt components as standalone modules
-- Compose complex prompts from simple building blocks
-- Supports variable injection and conditional sections
-- Works with any LLM API (OpenAI, Anthropic, etc.)
+- Prompt-Komponenten als eigenständige Module definieren
+- Komplexe Prompts aus einfachen Bausteinen zusammenstellen
+- Variablen-Injektion und bedingte Abschnitte möglich
+- Funktioniert mit jeder LLM-API (OpenAI, Anthropic usw.)
 
 ---
 
@@ -21,7 +21,7 @@ Instead of writing monolithic prompt strings, this system lets you define reusab
 
 ---
 
-## Setup
+## Installation
 
 ```bash
 git clone https://github.com/ChristianAfram/modular-prompt-system.git
@@ -31,16 +31,16 @@ pip install -r requirements.txt
 
 ---
 
-## Usage
+## Verwendung
 
 ```python
 from prompt_builder import PromptBuilder
 
 prompt = (
     PromptBuilder()
-    .add_system("You are a helpful assistant.")
-    .add_context("The user is a software developer.")
-    .add_instruction("Answer concisely in plain English.")
+    .add_system("Du bist ein hilfreicher Assistent.")
+    .add_context("Der Nutzer ist Softwareentwickler.")
+    .add_instruction("Antworte knapp und auf Deutsch.")
     .build()
 )
 
@@ -49,19 +49,19 @@ print(prompt)
 
 ---
 
-## Project Structure
+## Projektstruktur
 
 ```
 src/
-  prompt_builder.py    # Core builder class
-  components/          # Reusable prompt blocks
-  examples/            # Usage examples
+  prompt_builder.py    # Kern-Builder-Klasse
+  components/          # Wiederverwendbare Prompt-Bausteine
+  examples/            # Anwendungsbeispiele
 tests/
 requirements.txt
 ```
 
 ---
 
-## License
+## Lizenz
 
 MIT

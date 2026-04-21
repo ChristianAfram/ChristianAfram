@@ -1,28 +1,28 @@
 # WorldMap
 
-A browser-based interactive world map. Drag and rearrange countries to design your own custom Earth.
+Eine browser-basierte interaktive Weltkarte. Verschiebe Länder per Drag-and-Drop und gestalte deine eigene Erde.
 
-**Live demo:** https://wrldmap-0-0-1.vercel.app
+**Live-Demo:** https://wrldmap-0-0-1.vercel.app
 
 ---
 
-## Features
+## Funktionen
 
-- Drag-and-drop country repositioning
-- Freely rearrange all 195 countries on the map
-- Runs entirely in the browser — no backend, no login required
-- Shareable custom map configurations
+- Länder per Drag-and-Drop frei positionieren
+- Alle 195 Länder verschiebbar
+- Läuft komplett im Browser — kein Backend, kein Login
+- Keine Installation notwendig
 
 ---
 
 ## Tech Stack
 
 - TypeScript
-- Vercel (deployment)
+- Vercel (Deployment)
 
 ---
 
-## Setup
+## Installation
 
 ```bash
 git clone https://github.com/ChristianAfram/Wrldmap-0.0.1.git
@@ -31,22 +31,22 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000 in your browser.
+Anschließend http://localhost:3000 im Browser öffnen.
 
 ---
 
-## Project Structure
+## Projektstruktur
 
 ```
 src/
-  components/    # UI components
-  lib/           # Map logic and state
-  types/         # TypeScript types
-public/          # Static assets
+  components/    # UI-Komponenten
+  lib/           # Kartenlogik und Zustandsverwaltung
+  types/         # TypeScript-Typen
+public/          # Statische Assets
 ```
 
 ---
 
-## License
+## Lizenz
 
 MIT

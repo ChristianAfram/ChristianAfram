@@ -1,14 +1,14 @@
 # Mycro
 
-An AI-powered voice dictation assistant. Speak to compose text — Mycro transcribes and refines your input using AI.
+Ein KI-gestützter Sprachdiktier-Assistent. Sprich einfach — Mycro transkribiert und verfeinert deine Eingabe mithilfe von KI.
 
 ---
 
-## Features
+## Funktionen
 
-- Real-time voice-to-text transcription
-- AI-powered text refinement and formatting
-- Lightweight and runs locally
+- Echtzeit-Spracherkennung
+- KI-gestützte Textverbesserung und Formatierung
+- Läuft lokal im Browser
 
 ---
 
@@ -16,11 +16,11 @@ An AI-powered voice dictation assistant. Speak to compose text — Mycro transcr
 
 - TypeScript
 - Web Speech API
-- AI transcription/processing
+- KI-Transkription / Textverarbeitung
 
 ---
 
-## Setup
+## Installation
 
 ```bash
 git clone https://github.com/ChristianAfram/Mycro-0.1.git
@@ -31,26 +31,26 @@ npm run dev
 
 ---
 
-## Usage
+## Verwendung
 
-1. Open the app in your browser
-2. Click the microphone button to start recording
-3. Speak naturally — Mycro transcribes and processes your speech
-4. Copy the refined output
+1. App im Browser öffnen
+2. Mikrofon-Button klicken, um die Aufnahme zu starten
+3. Normal sprechen — Mycro transkribiert und verarbeitet die Sprache
+4. Ergebnis kopieren und weiterverwenden
 
 ---
 
-## Project Structure
+## Projektstruktur
 
 ```
 src/
-  components/    # UI components
-  lib/           # Transcription and AI logic
-  types/         # TypeScript types
+  components/    # UI-Komponenten
+  lib/           # Transkriptions- und KI-Logik
+  types/         # TypeScript-Typen
 ```
 
 ---
 
-## License
+## Lizenz
 
 MIT
