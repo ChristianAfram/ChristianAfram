@@ -35,4 +35,4 @@ Aktuell auf dem Weg zum *Fachinformatiker für Anwendungsentwicklung*.
 ## Kontakt
 
 Offen für Ausbildungsplätze und Kooperationen.  
-Erreichbar unter: **[E-Mail oder LinkedIn hier eintragen]**
+Erreichbar unter: christianafram54@gmail.com
