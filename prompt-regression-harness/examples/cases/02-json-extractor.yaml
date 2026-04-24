@@ -1,0 +1,128 @@
+# Test cases for the JSON extraction prompt
+# These cover: json_valid, json_schema, field content assertions
+
+name: "JSON Extractor — valid JSON output"
+description: "Model must return parseable JSON, no markdown fences"
+prompt_file: "../prompts/json-extractor.txt"
+model: claude-haiku-4-5
+max_tokens: 256
+tags:
+  - smoke
+  - json
+  - extractor
+
+input: |
+  Hi, I'm Sarah Chen, CTO at Nexus Labs. You can reach me at sarah.chen@nexuslabs.io
+  or call +1 (415) 555-0192.
+
+assertions:
+  - type: json_valid
+  - type: not_contains
+    value:
+      - "```"
+      - "```json"
+  - type: json_schema
+    value:
+      type: object
+      required:
+        - name
+        - email
+        - phone
+        - company
+        - role
+      properties:
+        name:
+          type: ["string", "null"]
+        email:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        company:
+          type: ["string", "null"]
+        role:
+          type: ["string", "null"]
+  - type: contains
+    value: "sarah"
+
+---
+
+name: "JSON Extractor — null fields when data missing"
+description: "Fields not present in input should be null, not omitted"
+prompt_file: "../prompts/json-extractor.txt"
+model: claude-haiku-4-5
+max_tokens: 256
+tags:
+  - json
+  - extractor
+  - edge-case
+
+input: |
+  Please contact John for more information.
+
+assertions:
+  - type: json_valid
+  - type: json_schema
+    value:
+      type: object
+      required:
+        - name
+        - email
+        - phone
+        - company
+        - role
+      properties:
+        name:
+          type: ["string", "null"]
+        email:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        company:
+          type: ["string", "null"]
+        role:
+          type: ["string", "null"]
+  - type: llm_judge
+    value:
+      prompt: |
+        The following JSON was produced by an extractor given the text "Please contact John for more information."
+        The email, phone, company, and role should all be null since that data is not in the input.
+        Is the JSON correct in using null for the unknown fields?
+      pass_if: "yes"
+
+---
+
+name: "JSON Extractor — no extra keys"
+description: "Output JSON should only have the five specified keys"
+prompt_file: "../prompts/json-extractor.txt"
+model: claude-haiku-4-5
+max_tokens: 256
+tags:
+  - json
+  - extractor
+
+input: |
+  Marcus Webb, Senior DevOps Engineer at CloudScale. marcus@cloudscale.com
+
+assertions:
+  - type: json_valid
+  - type: json_schema
+    value:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - email
+        - phone
+        - company
+        - role
+      properties:
+        name:
+          type: ["string", "null"]
+        email:
+          type: ["string", "null"]
+        phone:
+          type: ["string", "null"]
+        company:
+          type: ["string", "null"]
+        role:
+          type: ["string", "null"]

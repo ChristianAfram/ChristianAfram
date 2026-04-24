@@ -1,0 +1,86 @@
+# Test cases for the document summarizer prompt
+# These cover: bullet format, length constraints, content checks
+
+name: "Summarizer — basic format check"
+description: "Verifies the model outputs bullet points as instructed"
+prompt_file: "../prompts/summarizer.txt"
+model: claude-haiku-4-5
+max_tokens: 512
+tags:
+  - smoke
+  - summarizer
+
+input: |
+  The Apollo 11 mission, launched on July 16, 1969, was the first crewed lunar landing mission.
+  Astronauts Neil Armstrong, Buzz Aldrin, and Michael Collins traveled to the Moon. Armstrong
+  and Aldrin became the first humans to walk on the lunar surface on July 20, 1969, while Collins
+  orbited above. Armstrong's famous words upon landing were "The Eagle has landed." The mission
+  returned safely to Earth on July 24, 1969, and is considered one of the greatest achievements
+  in human history.
+
+assertions:
+  - type: contains
+    value: "•"
+  - type: not_contains
+    value: "Here is a summary"
+  - type: max_tokens
+    value: 250
+  - type: min_tokens
+    value: 30
+  - type: llm_judge
+    value:
+      prompt: "Does the output summarize the Apollo 11 mission accurately in bullet points? Answer yes or no."
+      pass_if: "yes"
+
+---
+
+name: "Summarizer — no preamble"
+description: "Output must go straight to bullets without intro text"
+prompt_file: "../prompts/summarizer.txt"
+model: claude-haiku-4-5
+max_tokens: 512
+tags:
+  - summarizer
+  - regression
+
+input: |
+  TypeScript is a strongly typed programming language that builds on JavaScript by adding
+  optional static typing and class-based object-oriented programming. It was developed by
+  Microsoft and released in 2012. TypeScript compiles to plain JavaScript, making it compatible
+  with any JavaScript runtime. It has become extremely popular for large-scale application
+  development due to its improved tooling and error detection.
+
+assertions:
+  - type: contains
+    value: "•"
+  - type: not_contains
+    value:
+      - "Here is a summary"
+      - "Summary:"
+      - "In summary"
+  - type: max_tokens
+    value: 300
+  - type: regex
+    value:
+      pattern: "^•"
+      flags: "m"
+
+---
+
+name: "Summarizer — short input handling"
+description: "Even for very short inputs, the model should produce at least one bullet"
+prompt_file: "../prompts/summarizer.txt"
+model: claude-haiku-4-5
+max_tokens: 256
+tags:
+  - summarizer
+  - edge-case
+
+input: |
+  Water boils at 100 degrees Celsius at sea level.
+
+assertions:
+  - type: contains
+    value: "•"
+  - type: max_tokens
+    value: 150

@@ -1,0 +1,87 @@
+# Test cases for the legal clause checker prompt
+# Demonstrates: regex, contains, LLM-as-judge, length constraints
+
+name: "Legal Clause — risk level present"
+description: "Output must include a risk level designation"
+prompt_file: "../prompts/legal-clause-checker.txt"
+model: claude-haiku-4-5
+max_tokens: 512
+tags:
+  - smoke
+  - legal
+
+input: |
+  "The Client agrees to indemnify and hold harmless the Service Provider from any and all
+  claims, damages, losses, costs, and expenses (including reasonable attorney's fees) arising
+  from the Client's use of the Service, even in cases of gross negligence by the Service Provider."
+
+assertions:
+  - type: regex
+    value:
+      pattern: "(LOW|MEDIUM|HIGH)"
+      flags: "i"
+  - type: max_tokens
+    value: 400
+  - type: llm_judge
+    value:
+      prompt: |
+        Does the following legal review:
+        1. Identify the clause type?
+        2. Assign a risk level (LOW, MEDIUM, or HIGH)?
+        3. Explain the risk in plain English?
+        Answer yes only if all three are present.
+      pass_if: "yes"
+
+---
+
+name: "Legal Clause — suggests alternative for HIGH risk"
+description: "When risk is HIGH, an alternative phrasing must be suggested"
+prompt_file: "../prompts/legal-clause-checker.txt"
+model: claude-haiku-4-5
+max_tokens: 600
+tags:
+  - legal
+  - regression
+
+input: |
+  "Vendor may terminate this agreement immediately and without notice for any reason
+  or no reason at all, with no liability to the Client whatsoever."
+
+assertions:
+  - type: contains
+    value: "HIGH"
+  - type: llm_judge
+    value:
+      prompt: |
+        The following is a review of a contract clause about unilateral termination with no notice.
+        Does the review correctly identify this as HIGH risk AND suggest an alternative safer phrasing?
+      pass_if: "yes"
+  - type: max_tokens
+    value: 500
+  - type: not_contains
+    value: "LOW"
+
+---
+
+name: "Legal Clause — low risk clause passthrough"
+description: "Standard mutual NDA clauses should be rated LOW or MEDIUM"
+prompt_file: "../prompts/legal-clause-checker.txt"
+model: claude-haiku-4-5
+max_tokens: 400
+tags:
+  - legal
+  - smoke
+
+input: |
+  "Both parties agree to keep confidential any non-public information shared during
+  the term of this agreement and for two years thereafter."
+
+assertions:
+  - type: regex
+    value:
+      pattern: "(LOW|MEDIUM)"
+      flags: "i"
+  - type: not_contains
+    value: "HIGH"
+  - type: max_tokens
+    value: 350

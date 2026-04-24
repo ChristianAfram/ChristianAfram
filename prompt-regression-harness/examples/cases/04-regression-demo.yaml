@@ -1,0 +1,132 @@
+# Demonstration of all assertion types in one file
+# Use this as a reference / cheat sheet
+
+name: "Assertion demo — contains"
+description: "Basic substring check (string or list)"
+model: claude-haiku-4-5
+max_tokens: 256
+tags:
+  - demo
+
+input: |
+  Say hello to the world and mention that today is a great day.
+
+assertions:
+  - type: contains
+    value: "hello"
+  - type: contains
+    value:
+      - "hello"
+      - "day"
+
+---
+
+name: "Assertion demo — not_contains"
+description: "Output must NOT contain certain strings"
+model: claude-haiku-4-5
+max_tokens: 256
+tags:
+  - demo
+
+input: |
+  Write a single sentence greeting. Do not mention the word "goodbye".
+
+assertions:
+  - type: not_contains
+    value: "goodbye"
+
+---
+
+name: "Assertion demo — regex"
+description: "Output must match a regex pattern"
+model: claude-haiku-4-5
+max_tokens: 128
+tags:
+  - demo
+
+input: |
+  Give me today's date in the format YYYY-MM-DD. Output only the date, nothing else.
+
+assertions:
+  - type: regex
+    value:
+      pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+      flags: "m"
+  - type: max_tokens
+    value: 20
+
+---
+
+name: "Assertion demo — starts_with and ends_with"
+description: "Output boundary assertions"
+model: claude-haiku-4-5
+max_tokens: 128
+tags:
+  - demo
+
+input: |
+  Start your response with "BEGIN" and end it with "END". Put a short message in between.
+
+assertions:
+  - type: starts_with
+    value: "BEGIN"
+  - type: ends_with
+    value: "END"
+
+---
+
+name: "Assertion demo — JSON with schema"
+description: "Full JSON output validation"
+model: claude-haiku-4-5
+max_tokens: 256
+tags:
+  - demo
+  - json
+
+input: |
+  Return a JSON object with these fields:
+  - "status": always the string "ok"
+  - "count": the number 42
+  - "items": an array with exactly two strings: "alpha" and "beta"
+
+  Return ONLY the JSON, no explanation.
+
+assertions:
+  - type: json_valid
+  - type: json_schema
+    value:
+      type: object
+      required:
+        - status
+        - count
+        - items
+      properties:
+        status:
+          type: string
+          enum: ["ok"]
+        count:
+          type: number
+        items:
+          type: array
+          items:
+            type: string
+  - type: not_contains
+    value: "```"
+
+---
+
+name: "Assertion demo — token limits"
+description: "Enforce response length boundaries"
+model: claude-haiku-4-5
+max_tokens: 512
+tags:
+  - demo
+
+input: |
+  Write a haiku about software testing. Keep it exactly three lines.
+
+assertions:
+  - type: min_tokens
+    value: 5
+  - type: max_tokens
+    value: 80

@@ -1,0 +1,40 @@
+{
+  "name": "prompt-regression-harness",
+  "version": "1.0.0",
+  "description": "pytest-style regression testing for LLM prompts — catch silent prompt rot before it hits production",
+  "type": "module",
+  "bin": {
+    "promptreg": "./src/cli.js"
+  },
+  "scripts": {
+    "test": "node src/cli.js run",
+    "run:example": "node src/cli.js run --cases examples/cases",
+    "lint": "node --check src/**/*.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.37.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "diff": "^7.0.0",
+    "js-yaml": "^4.1.0",
+    "ora": "^8.2.0",
+    "table": "^6.9.0",
+    "zod": "^3.24.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "llm",
+    "prompt",
+    "testing",
+    "regression",
+    "anthropic",
+    "claude",
+    "eval"
+  ],
+  "author": "Christian Afram",
+  "license": "MIT"
+}
