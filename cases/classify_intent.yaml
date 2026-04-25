@@ -1,0 +1,41 @@
+# Test cases for prompts/classify_intent.md
+# Intent classification — tests exact output format compliance
+
+- name: "Classify — question"
+  prompt: prompts/classify_intent.md
+  variables:
+    message: "What time does the store close?"
+  assertions:
+    - type: exact
+      label: "Returns QUESTION"
+      value: "QUESTION"
+
+- name: "Classify — complaint"
+  prompt: prompts/classify_intent.md
+  variables:
+    message: "I've been waiting three weeks and still haven't received my order!"
+  assertions:
+    - type: exact
+      label: "Returns COMPLAINT"
+      value: "COMPLAINT"
+
+- name: "Classify — request"
+  prompt: prompts/classify_intent.md
+  variables:
+    message: "Please send me the invoice for last month."
+  assertions:
+    - type: exact
+      label: "Returns REQUEST"
+      value: "REQUEST"
+    - type: not_contains
+      label: "No explanation appended"
+      value: "."
+
+- name: "Classify — compliment"
+  prompt: prompts/classify_intent.md
+  variables:
+    message: "Your support team was absolutely fantastic, thank you!"
+  assertions:
+    - type: exact
+      label: "Returns COMPLIMENT"
+      value: "COMPLIMENT"

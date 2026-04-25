@@ -1,0 +1,47 @@
+# Test cases for prompts/n8n_description.md
+# Tests documentation quality for automation workflows
+
+- name: "n8n — Slack alert workflow"
+  prompt: prompts/n8n_description.md
+  variables:
+    workflow_description: |
+      A workflow that monitors a Postgres database every 5 minutes for rows in the
+      `orders` table where status = 'failed'. When failures are found, it sends a
+      formatted Slack message to the #ops-alerts channel listing the order IDs and
+      error reasons. It also writes a summary row to a Google Sheet for tracking.
+  assertions:
+    - type: contains
+      label: "Mentions trigger/schedule"
+      value: "5 minute"
+      case_sensitive: false
+    - type: contains
+      label: "Mentions Slack"
+      value: "Slack"
+    - type: contains
+      label: "Mentions Google Sheet"
+      value: "Google Sheet"
+    - type: max_tokens
+      label: "Concise documentation"
+      value: 400
+    - type: llm_judge
+      label: "Covers what, trigger, and output"
+      criterion: "The response explains what the workflow does, what triggers it (schedule), and what it outputs (Slack message and Google Sheet entry)."
+
+- name: "n8n — Lead enrichment workflow"
+  prompt: prompts/n8n_description.md
+  variables:
+    workflow_description: |
+      Triggered by a new contact form submission webhook. Extracts the email domain,
+      looks up the company using the Clearbit API, enriches the CRM record in HubSpot
+      with company size and industry, and sends a personalized welcome email via SendGrid.
+  assertions:
+    - type: contains
+      label: "Mentions webhook"
+      value: "webhook"
+      case_sensitive: false
+    - type: contains
+      label: "Mentions HubSpot or CRM"
+      value: "HubSpot"
+    - type: llm_judge
+      label: "Accurately describes the enrichment pipeline"
+      criterion: "The response accurately describes a lead enrichment pipeline: webhook trigger → company lookup → CRM update → welcome email."

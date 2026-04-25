@@ -1,0 +1,41 @@
+# Test cases for prompts/legal_review.md
+# Fuzzy / qualitative assertions — good candidates for llm_judge
+
+- name: "Legal review — liability clause"
+  prompt: prompts/legal_review.md
+  variables:
+    clause: |
+      "The Provider shall not be liable for any damages, losses, or expenses of any kind
+      arising out of or relating to this agreement, regardless of the form of action or
+      the theory of recovery, even if the Provider has been advised of the possibility
+      of such damages."
+  assertions:
+    - type: contains
+      label: "Mentions liability"
+      value: "liabilit"
+    - type: regex
+      label: "Has numbered sections"
+      pattern: "^[1-9]\\."
+      flags: "m"
+    - type: max_tokens
+      label: "Under 600 tokens"
+      value: 600
+    - type: llm_judge
+      label: "Identifies unlimited liability exclusion as a risk"
+      criterion: "The response identifies that the unlimited liability exclusion is a significant risk and recommends adding a liability cap or carve-outs for gross negligence or intentional misconduct."
+    - type: llm_judge
+      label: "Professional legal tone"
+      criterion: "The response is written in a clear, professional tone appropriate for legal document review."
+
+- name: "Legal review — payment terms"
+  prompt: prompts/legal_review.md
+  variables:
+    clause: |
+      "Payment is due within 30 days of invoice. Late payments are subject to interest."
+  assertions:
+    - type: contains
+      label: "Mentions payment"
+      value: "payment"
+    - type: llm_judge
+      label: "Flags missing interest rate"
+      criterion: "The response notes that the interest rate for late payments is not specified, which is a risk."

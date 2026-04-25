@@ -1,0 +1,51 @@
+# Test cases for prompts/extract_json.md
+# These test structured output reliability — a common regression vector
+
+- name: "Extract JSON — full contact"
+  prompt: prompts/extract_json.md
+  variables:
+    input: |
+      Hi, I'm Sarah Chen, senior engineer at Acme Corp. You can reach me at sarah.chen@acme.com.
+  assertions:
+    - type: json_valid
+      label: "Output is valid JSON"
+    - type: contains
+      label: "Contains name"
+      value: "Sarah Chen"
+    - type: contains
+      label: "Contains email"
+      value: "sarah.chen@acme.com"
+    - type: contains
+      label: "Contains company"
+      value: "Acme"
+    - type: json_schema
+      label: "Matches expected schema"
+      schema:
+        type: object
+        required: [name, email, company, role]
+        properties:
+          name:
+            type: string
+          email:
+            type: [string, "null"]
+          company:
+            type: [string, "null"]
+          role:
+            type: [string, "null"]
+    - type: not_regex
+      label: "No markdown fences"
+      pattern: "```"
+
+- name: "Extract JSON — no email"
+  prompt: prompts/extract_json.md
+  variables:
+    input: "John Smith, founder of Startup Inc."
+  assertions:
+    - type: json_valid
+      label: "Output is valid JSON"
+    - type: contains
+      label: "Contains name"
+      value: "John Smith"
+    - type: not_regex
+      label: "No markdown fences"
+      pattern: "```"

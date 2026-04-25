@@ -1,0 +1,38 @@
+# Test cases for prompts/summarize.md
+# Run with: promptreg run
+
+- name: "Summarize — tech article"
+  prompt: prompts/summarize.md
+  variables:
+    text: |
+      Artificial intelligence is transforming the software industry at an unprecedented pace.
+      Large language models like Claude and GPT-4 can now write code, draft documents, and
+      answer complex questions. Companies are integrating these tools into their workflows
+      to boost developer productivity and reduce repetitive tasks. However, concerns remain
+      about accuracy, hallucination, and job displacement. Experts suggest that AI will
+      augment rather than replace most software engineers in the near term.
+  assertions:
+    - type: contains
+      label: "Mentions AI"
+      value: "AI"
+    - type: max_tokens
+      label: "Under 200 tokens"
+      value: 200
+    - type: not_contains
+      label: "No hallucination marker"
+      value: "I cannot"
+    - type: llm_judge
+      label: "Is a valid summary"
+      criterion: "The response is a concise 2-3 sentence summary that captures the main point about AI in software."
+
+- name: "Summarize — empty-ish input"
+  prompt: prompts/summarize.md
+  variables:
+    text: "The sky is blue."
+  assertions:
+    - type: min_tokens
+      label: "At least some response"
+      value: 5
+    - type: max_tokens
+      label: "Doesn't ramble"
+      value: 150
